@@ -7,3 +7,16 @@ sources:
     tables:
       - name: departments
       - name: employees
+
+  - name: snowflake_sample_data_tpch_sf1
+    database: SNOWFLAKE_SAMPLE_DATA
+    schema: TPCH_SF1
+    tables:
+      - name: customer
+      - name: orders
+      - name: lineitem
+      - name: nation
+      - name: region
+      - name: part
+      - name: supplier
+      - name: partsupp
