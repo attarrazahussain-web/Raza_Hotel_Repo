@@ -5,8 +5,8 @@ my_new_project:
       type: snowflake
       account: KI58349_BUWBQIX-SQ09763
       user: RAZAHUSSAIN
-      password: Raaz{123456789
+      password: "Raaz{123456789"
       role: ACCOUNTADMIN         # optional
       database: HOTEL_DB
-      schema: HOTEL_DB.DBT_DEV             # or your schema
-      warehouse: PC_DBT_WH      # <-- must be set
+      schema: DBT_DEV            # only schema name
+      warehouse: PC_DBT_WH       # must exist and be active
