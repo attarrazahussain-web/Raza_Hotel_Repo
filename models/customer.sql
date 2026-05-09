@@ -1,5 +1,6 @@
 {{ config(
-    materialized='table'
+    materialized='table',
+    snowflake_warehouse='PC_DBT_WH'
 )}}
 with customer as (
 select C_CUSTKEY as Cust_Key, 
