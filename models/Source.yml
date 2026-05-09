@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: pc_dbt_db
+    database: PC_DBT_DB
+    schema: DBT_RHUSSAIN
+    tables:
+      - name: departments
+      - name: employees
