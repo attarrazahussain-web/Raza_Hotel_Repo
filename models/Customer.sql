@@ -1,3 +1,6 @@
+{{ config(
+    materialized='table'
+)}}
 with customer as (
 select C_CUSTKEY as Cust_Key, 
 C_NAME as Cust_Name,
