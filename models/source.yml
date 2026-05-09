@@ -8,7 +8,7 @@ sources:
       - name: departments
       - name: employees
 
-  - name: snowflake_sample_data_tpch_sf1
+  - name: snowflake_sample_data
     database: SNOWFLAKE_SAMPLE_DATA
     schema: TPCH_SF1
     tables:

@@ -10,7 +10,7 @@ C_PHONE as Cust_Phone,
 C_ACCTBAL as Cust_Account_Balance,
 C_MKTSEGMENT as Cust_Mktsegment,
 C_COMMENT  as Cust_Comment
-from {{ source('snowflake_sample_data_tpch_sf1','customer')}}
+from {{ source('snowflake_sample_data','customer')}}
 ) 
 
 select * from customer
