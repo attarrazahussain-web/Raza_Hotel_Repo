@@ -2,6 +2,7 @@
     materialized='table',
     snowflake_warehouse='PC_DBT_WH'
 ) }}
+
 with lineitem as (
     select * from HOTEL_DB.DBT_DEV.lineitem
 ),
@@ -28,10 +29,10 @@ region as (
 )
 
 select
-    -- lineitem columns
+    -- lineitem columns (fact grain)
     l.order_key,
-    l.part_key,
-    l.supp_key,
+    l.part_key   as lineitem_part_key,
+    l.supp_key   as lineitem_supp_key,
     l.line_number,
     l.quantity,
     l.extended_price,
@@ -64,37 +65,40 @@ select
     c.cust_comment,
 
     -- supplier columns
+    s.supp_key   as supplier_key,
     s.supp_name,
     s.supp_address,
     s.nation_key as supp_nationkey,
     s.supp_phone,
     s.account_balance,
-    s.comment as supp_comment,
+    s.comment    as supp_comment,
 
     -- part columns
-    p.part_key,
+    p.part_key   as product_part_key,
     p.part_name,
     p.brand,
     p.type,
     p.size,
     p.container,
     p.retail_price,
-    p.comment as part_comment,
+    p.comment    as part_comment,
 
     -- partsupp columns
+    ps.part_key  as partsupp_part_key,
+    ps.supp_key  as partsupp_supp_key,
     ps.avail_qty,
     ps.supply_cost,
-    ps.comment as partsupp_comment,
+    ps.comment   as partsupp_comment,
 
     -- nation columns
     n.nation_key,
     n.nation_name,
-    n.comment as nation_comment,
+    n.comment    as nation_comment,
 
     -- region columns
     r.region_key,
     r.region_name,
-    r.comment as region_comment
+    r.comment    as region_comment
 
 from lineitem l
 join orders o     on l.order_key = o.order_key
