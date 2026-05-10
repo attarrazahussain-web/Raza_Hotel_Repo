@@ -2,35 +2,33 @@
     materialized='table',
     snowflake_warehouse='PC_DBT_WH'
 ) }}
-
 with lineitem as (
-    select * from {{ ref('lineitem') }}
+    select * from HOTEL_DB.DBT_DEV.lineitem
 ),
 orders as (
-    select * from {{ ref('orders') }}
+    select * from HOTEL_DB.DBT_DEV.orders
 ),
 customer as (
-    select * from {{ ref('customer') }}
+    select * from HOTEL_DB.DBT_DEV.customer
 ),
 supplier as (
-    select * from {{ ref('supplier') }}
+    select * from HOTEL_DB.DBT_DEV.supplier
 ),
 part as (
-    select * from {{ ref('part') }}
+    select * from HOTEL_DB.DBT_DEV.part
 ),
 partsupp as (
-    select * from {{ ref('partsupp') }}
+    select * from HOTEL_DB.DBT_DEV.partsupp
 ),
 nation as (
-    select * from {{ ref('nation') }}
+    select * from HOTEL_DB.DBT_DEV.nation
 ),
 region as (
-    select * from {{ ref('region') }}
+    select * from HOTEL_DB.DBT_DEV.region
 )
 
 select
     -- lineitem columns
-    l.lineitem_key,
     l.order_key,
     l.part_key,
     l.supp_key,
@@ -48,7 +46,6 @@ select
     l.ship_mode,
 
     -- orders columns
-    o.order_key,
     o.cust_key,
     o.order_status,
     o.total_price,
@@ -58,23 +55,21 @@ select
     o.ship_priority,
 
     -- customer columns
-    c.cust_key,
     c.cust_name,
-    c.cust_address,
-    c.cust_nationkey,
+    c.cust_addrress,
+    c.cust_nataionkey,
     c.cust_phone,
     c.cust_account_balance,
     c.cust_mktsegment,
     c.cust_comment,
 
     -- supplier columns
-    s.supp_key,
     s.supp_name,
     s.supp_address,
-    s.supp_nationkey,
+    s.nation_key as supp_nationkey,
     s.supp_phone,
-    s.supp_acctbal,
-    s.supp_comment,
+    s.account_balance,
+    s.comment as supp_comment,
 
     -- part columns
     p.part_key,
@@ -87,8 +82,6 @@ select
     p.comment as part_comment,
 
     -- partsupp columns
-    ps.part_key,
-    ps.supp_key,
     ps.avail_qty,
     ps.supply_cost,
     ps.comment as partsupp_comment,
@@ -109,5 +102,5 @@ join customer c   on o.cust_key = c.cust_key
 join supplier s   on l.supp_key = s.supp_key
 join part p       on l.part_key = p.part_key
 join partsupp ps  on l.part_key = ps.part_key and l.supp_key = ps.supp_key
-join nation n     on c.cust_nationkey = n.nation_key
+join nation n     on c.cust_nataionkey = n.nation_key
 join region r     on n.region_key = r.region_key
