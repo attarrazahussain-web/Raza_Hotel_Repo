@@ -1,6 +1,6 @@
 {{ config(
     materialized='table',
-    snowflake_warehouse='PC_DBT_WH'
+    snowflake_warehouse='PRACTICEV1'
 ) }}
 
 with orders as (
@@ -15,7 +15,7 @@ with orders as (
         O_CLERK         as clerk,
         O_SHIPPRIORITY  as ship_priority,
         O_COMMENT       as comment
-    from {{ source('snowflake_sample_data', 'orders') }}
+    from {{source(SNOWFLAKE_SAMPLE_DATA, orders)}}
 
 )
 
